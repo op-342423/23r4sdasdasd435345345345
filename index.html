@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>THORN — rings, clothing, chains</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ============ SPLIT-OPEN INTRO ============
+       This sits on top of the whole page when it loads, then
+       JS slides the two halves apart like doors opening, with
+       a bright flash burst timed to the reveal. -->
+  <div class="split-intro" id="splitIntro">
+    <div class="split-intro__panel split-intro__panel--left"></div>
+    <div class="split-intro__panel split-intro__panel--right"></div>
+  </div>
+  <script>
+    // Safety net: no matter what happens elsewhere (slow assets,
+    // a script error, a caching hiccup), the intro is forced open
+    // after 3s so the site can never get stuck on the black panels.
+    setTimeout(function () {
+      var i = document.getElementById('splitIntro');
+      if (i) i.classList.add('is-open');
+    }, 3000);
+  </script>
+
+  <header class="nav">
+    <span class="nav__mark chrome-text">THORN</span>
+    <nav class="nav__links">
+      <a href="#products">Shop</a>
+      <a href="#" id="cartOpenBtn">Cart <span class="cart-count" id="cartCount">0</span></a>
+    </nav>
+  </header>
+
+  <!-- ============ CART DRAWER ============
+       Opens instantly from the nav instead of leaving the page —
+       full checkout (address, GPS, payment) still happens on
+       checkout.html, reached via the button at the bottom. -->
+  <div class="cart-drawer__overlay" id="cartDrawerOverlay"></div>
+  <aside class="cart-drawer" id="cartDrawer" role="dialog" aria-label="Your cart" aria-hidden="true">
+    <div class="cart-drawer__header">
+      <h2>Your cart</h2>
+      <button class="cart-drawer__close" id="cartDrawerClose" aria-label="Close cart">&times;</button>
+    </div>
+    <div class="cart-drawer__items" id="cartDrawerItems"></div>
+    <div class="cart-drawer__actions" id="cartDrawerActions" style="display:none;">
+      <button type="button" class="cart-drawer__link" id="cartDrawerContinueBtn">Continue shopping</button>
+      <button type="button" class="cart-drawer__link cart-drawer__link--danger" id="cartDrawerClearBtn">Remove all</button>
+    </div>
+    <div class="cart-drawer__footer">
+      <div class="cart-drawer__total">
+        <span>Total</span>
+        <span id="cartDrawerTotal">$0</span>
+      </div>
+      <a class="btn" href="checkout.html" id="cartDrawerCheckoutBtn" style="text-decoration:none;text-align:center;">Go to checkout</a>
+    </div>
+  </aside>
+
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <!-- Replace this src with your own video file, e.g. "assets/hero.mp4".
+         autoplay + muted + loop is required by browsers to auto-play video
+         without the user clicking play first. -->
+    <video class="hero__video" autoplay muted loop playsinline>
+      <source src="assets/hero.mp4" type="video/mp4">
+    </video>
+
+    <!-- Electric bolts + sparks get injected here by script.js —
+         a burst on load, then ambient strikes while the hero is
+         on screen. Pure SVG/JS, no image assets needed. -->
+    <div class="lightning-container" id="lightningContainer"></div>
+
+    <!-- Faint CRT scanline texture over the video -->
+    <div class="scanline-overlay"></div>
+
+    <div class="hero__content">
+      <h1 class="hero__title" id="heroTitle"><span class="letter chrome-text">T</span><span class="letter chrome-text">H</span><span class="letter chrome-text">O</span><span class="letter chrome-text">R</span><span class="letter chrome-text">N</span></h1>
+      <p class="hero__sub">NOT MADE FOR EVERYONE.</p>
+    </div>
+  </section>
+
+  <div class="holo-bar"></div>
+
+  <div class="marquee">
+    <div class="marquee__track" id="marqueeTrack">DROP 003 OUT NOW &nbsp;&#8226;&nbsp; PAY AT THE DOOR &nbsp;&#8226;&nbsp; DROP 003 OUT NOW &nbsp;&#8226;&nbsp; PAY AT THE DOOR &nbsp;&#8226;&nbsp;</div>
+  </div>
+
+  <!-- ============ PRODUCTS ============
+       This grid is empty in the HTML — script.js fills it in by
+       reading whatever products are stored in data.js / localStorage.
+       That's what lets the owner's admin.html page add a product
+       and have it show up here automatically. -->
+  <section class="products" id="products">
+    <h2>The collection</h2>
+
+    <div class="shop-controls">
+      <div class="shop-search">
+        <input type="text" id="searchInput" placeholder="Search rings, chains, hoodies…" aria-label="Search products">
+      </div>
+      <div class="shop-filters" id="categoryFilters" role="group" aria-label="Filter by category">
+        <button type="button" class="filter-chip is-active" data-category="All">All</button>
+        <button type="button" class="filter-chip" data-category="Rings">Rings</button>
+        <button type="button" class="filter-chip" data-category="Clothing">Clothing</button>
+        <button type="button" class="filter-chip" data-category="Accessories">Accessories</button>
+      </div>
+      <select class="shop-sort" id="sortSelect" aria-label="Sort products">
+        <option value="newest">Newest</option>
+        <option value="price-asc">Price: Low → High</option>
+        <option value="price-desc">Price: High → Low</option>
+      </select>
+    </div>
+
+    <p class="shop-empty" id="shopEmpty" style="display:none;">No items match your search.</p>
+    <div class="product-grid" id="productGrid"></div>
+  </section>
+
+  <!-- ============ PRODUCT MODAL (lightbox) ============
+       Opens when a product photo is clicked. Shows the full-size
+       photo gallery plus the full item description. -->
+  <div class="modal-overlay" id="productModal">
+    <div class="modal-box">
+      <button class="modal-close" id="modalClose" aria-label="Close">&times;</button>
+      <div class="modal-gallery">
+        <button class="modal-arrow modal-arrow--prev" id="modalPrev" aria-label="Previous photo">&#8249;</button>
+        <img class="modal-image" id="modalImage" src="" alt="">
+        <button class="modal-arrow modal-arrow--next" id="modalNext" aria-label="Next photo">&#8250;</button>
+      </div>
+      <div class="modal-dots" id="modalDots"></div>
+      <div class="modal-info">
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:0.5rem;">
+          <p class="category" id="modalCategory"></p>
+          <button type="button" class="wishlist-btn" id="modalWishlistBtn" aria-label="Save to wishlist" aria-pressed="false">&#9825;</button>
+        </div>
+        <h2 id="modalName"></h2>
+        <p class="price" id="modalPrice"></p>
+        <p class="stock-note" id="modalStock"></p>
+        <p class="modal-desc" id="modalDesc"></p>
+        <div class="qty-selector" id="modalQtyWrap">
+          <button type="button" class="qty-btn" id="modalQtyMinus" aria-label="Decrease quantity">&minus;</button>
+          <span class="qty-value" id="modalQtyValue">1</span>
+          <button type="button" class="qty-btn" id="modalQtyPlus" aria-label="Increase quantity">+</button>
+        </div>
+        <button class="btn" id="modalAddBtn">Add to cart</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="ui.js"></script>
+  <script src="script.js"></script>
+  <script src="cursor.js?v=2"></script>
+</body>
+</html>
