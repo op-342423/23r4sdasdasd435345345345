@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>THORN — sign up</title>
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <meta name="description" content="Create a THORN account to check out faster and keep track of your orders.">
+  <meta name="robots" content="noindex, nofollow">
+
+  <!-- Open Graph / social share preview -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="THORN">
+  <meta property="og:title" content="THORN — Sign Up">
+  <meta property="og:description" content="Create a THORN account to check out faster and keep track of your orders.">
+  <meta property="og:image" content="https://thorn-store.example.com/assets/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:url" content="https://thorn-store.example.com/register.html">
+
+  <!-- Twitter card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="THORN — Sign Up">
+  <meta name="twitter:description" content="Create a THORN account to check out faster and keep track of your orders.">
+  <meta name="twitter:image" content="https://thorn-store.example.com/assets/og-image.jpg">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <header class="nav">
+    <a href="index.html" class="nav__mark chrome-text" data-brand style="text-decoration:none;">THORN</a>
+    <nav class="nav__links">
+      <a href="index.html">Back to shop</a>
+    </nav>
+  </header>
+
+  <div class="auth-wrap">
+    <div class="auth-card" id="authCard">
+      <span class="auth-card__mark chrome-text" data-brand>THORN</span>
+      <div class="auth-card__divider"></div>
+      <h1>Create an account</h1>
+      <p class="auth-card__sub">
+        Takes a few seconds — lets you track orders and save a wishlist.
+      </p>
+
+      <div class="field">
+        <label for="email">Email</label>
+        <input type="email" id="email" placeholder="you@example.com" autocomplete="email">
+      </div>
+      <div class="field">
+        <label for="password">Password</label>
+        <input type="password" id="password" placeholder="At least 6 characters" autocomplete="new-password">
+      </div>
+
+      <button class="btn" id="registerBtn">Create account</button>
+      <p class="auth-card__foot">
+        Already have an account? <a href="login.html">Log in</a>
+      </p>
+    </div>
+  </div>
+
+  <script src="api.js"></script>
+  <script src="brand.js"></script>
+  <script src="ui.js"></script>
+  <script src="announcement.js"></script>
+  <script src="footer.js"></script>
+  <script src="register.js"></script>
+</body>
+</html>
