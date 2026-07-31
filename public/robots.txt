@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+Disallow: /admin.html
+Disallow: /checkout.html
+Disallow: /login.html
+Disallow: /register.html
+Disallow: /my-orders.html
+Disallow: /wishlist.html
+Disallow: /api/
+
+Sitemap: https://thorn-store.example.com/sitemap.xml
