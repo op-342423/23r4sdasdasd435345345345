@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>THORN — item</title>
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#0a0a0a">
+  <meta name="description" content="Full details, pricing, and photos for this THORN piece. Rings, chains, and clothing from the latest drop.">
+  <link rel="canonical" href="https://simplyher.onrender.com/product.html">
+
+  <!-- Open Graph / social share preview -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="THORN">
+  <meta property="og:title" content="THORN — Item Details">
+  <meta property="og:description" content="Full details, pricing, and photos for this THORN piece. Rings, chains, and clothing from the latest drop.">
+  <meta property="og:image" content="https://simplyher.onrender.com/assets/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:url" content="https://simplyher.onrender.com/product.html">
+
+  <!-- Twitter card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="THORN — Item Details">
+  <meta name="twitter:description" content="Full details, pricing, and photos for this THORN piece. Rings, chains, and clothing from the latest drop.">
+  <meta name="twitter:image" content="https://simplyher.onrender.com/assets/og-image.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Cormorant+Garamond:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <header class="nav">
+    <a href="index.html" class="nav__mark chrome-text" data-brand style="text-decoration:none;">THORN</a>
+    <nav class="nav__links">
+      <a href="index.html">Back to shop</a>
+      <a href="checkout.html" class="nav-cart" aria-label="Open cart">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M6 8h12l-1.1 11.2a2 2 0 0 1-2 1.8H9.1a2 2 0 0 1-2-1.8L6 8z"/>
+          <path d="M9 8V6a3 3 0 0 1 6 0v2"/>
+        </svg>
+        <span class="cart-count" id="cartCount">0</span>
+      </a>
+      <span class="account-bar" id="accountBar"></span>
+    </nav>
+  </header>
+
+  <p class="pdp-breadcrumb" id="pdpBreadcrumb"><a href="index.html">Shop</a></p>
+
+  <!-- Populated by product.js once the product loads; hidden until then
+       so nothing flashes empty/broken while the fetch is in flight. -->
+  <section class="pdp" id="pdpRoot" style="display:none;">
+    <div class="pdp__gallery">
+      <div class="pdp__main-frame" id="pdpMainFrame">
+        <div class="img-skeleton" id="pdpSkeleton"></div>
+        <img class="pdp__main-image" id="pdpMainImage" src="" alt="" draggable="false">
+        <button type="button" class="carousel-arrow carousel-arrow--prev" id="pdpPrev" aria-label="Previous photo" style="display:none;">&#8249;</button>
+        <button type="button" class="carousel-arrow carousel-arrow--next" id="pdpNext" aria-label="Next photo" style="display:none;">&#8250;</button>
+      </div>
+      <div class="pdp__thumbs" id="pdpThumbs"></div>
+    </div>
+
+    <div class="pdp__info">
+      <p class="category" id="pdpCategory"></p>
+      <h1 id="pdpName"></h1>
+      <div class="pdp__rating" id="pdpRatingSummary"></div>
+      <p class="price" id="pdpPrice"></p>
+      <p class="stock-note" id="pdpStock"></p>
+      <p class="pdp__sku" id="pdpSku"></p>
+      <p class="pdp__desc" id="pdpDesc"></p>
+
+      <dl class="pdp__specs" id="pdpSpecs"></dl>
+
+      <div class="qty-selector" id="pdpQtyWrap">
+        <button type="button" class="qty-btn" id="pdpQtyMinus" aria-label="Decrease quantity">&minus;</button>
+        <span class="qty-value" id="pdpQtyValue">1</span>
+        <button type="button" class="qty-btn" id="pdpQtyPlus" aria-label="Increase quantity">+</button>
+      </div>
+
+      <div class="pdp__actions">
+        <button type="button" class="btn" id="pdpAddBtn">Add to cart</button>
+        <button type="button" class="btn btn--ghost" id="pdpBuyNowBtn">Buy now</button>
+        <button type="button" class="wishlist-btn" id="pdpWishlistBtn" aria-label="Save to wishlist" aria-pressed="false">&#9825;</button>
+      </div>
+
+      <p class="pdp__delivery" id="pdpDeliveryInfo"></p>
+    </div>
+  </section>
+
+  <p class="pdp-not-found" id="pdpNotFound" style="display:none;">
+    We couldn't find that item — it may have been removed. <a href="index.html">Back to the shop</a>.
+  </p>
+
+  <section class="pdp-reviews" id="pdpReviewsSection" style="display:none;">
+    <h2>Reviews</h2>
+    <div id="pdpReviewsList"></div>
+
+    <div class="review-form">
+      <h3>Write a review</h3>
+      <div class="field">
+        <label>Your rating</label>
+        <div class="stars-input" id="reviewStarsInput">
+          <button type="button" data-star="1" aria-label="1 star">&#9733;</button>
+          <button type="button" data-star="2" aria-label="2 stars">&#9733;</button>
+          <button type="button" data-star="3" aria-label="3 stars">&#9733;</button>
+          <button type="button" data-star="4" aria-label="4 stars">&#9733;</button>
+          <button type="button" data-star="5" aria-label="5 stars">&#9733;</button>
+        </div>
+      </div>
+      <div class="field">
+        <label for="reviewName">Your name</label>
+        <input type="text" id="reviewName" placeholder="e.g. Sara M.">
+      </div>
+      <div class="field">
+        <label for="reviewComment">Review (optional)</label>
+        <textarea id="reviewComment" rows="3" placeholder="What did you think?"></textarea>
+      </div>
+      <button type="button" class="btn" id="submitReviewBtn" style="width:auto;">Submit review</button>
+      <p style="color:var(--muted);font-size:0.72rem;margin-top:0.6rem;">Reviews are checked before they appear publicly.</p>
+    </div>
+  </section>
+
+  <section class="products" id="relatedSection" hidden>
+    <h2>You may also like</h2>
+    <div class="product-grid" id="relatedGrid"></div>
+  </section>
+
+  <script src="api.js" defer></script>
+  <script src="brand.js" defer></script>
+  <script src="ui.js" defer></script>
+  <script src="announcement.js" defer></script>
+  <script src="coupon-banner.js" defer></script>
+  <script src="footer.js" defer></script>
+  <script src="product.js" defer></script>
+</body>
+</html>
