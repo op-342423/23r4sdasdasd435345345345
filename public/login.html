@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>THORN — log in</title>
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#0a0a0a">
+  <meta name="description" content="Log in to your THORN account to track orders and manage your wishlist.">
+  <meta name="robots" content="noindex, nofollow">
+
+  <!-- Open Graph / social share preview -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="THORN">
+  <meta property="og:title" content="THORN — Log In">
+  <meta property="og:description" content="Log in to your THORN account to track orders and manage your wishlist.">
+  <meta property="og:image" content="https://simplyher.onrender.com/assets/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:url" content="https://simplyher.onrender.com/login.html">
+
+  <!-- Twitter card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="THORN — Log In">
+  <meta name="twitter:description" content="Log in to your THORN account to track orders and manage your wishlist.">
+  <meta name="twitter:image" content="https://simplyher.onrender.com/assets/og-image.jpg">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <header class="nav">
+    <a href="index.html" class="nav__mark chrome-text" data-brand style="text-decoration:none;">THORN</a>
+    <nav class="nav__links">
+      <a href="index.html">Back to shop</a>
+    </nav>
+  </header>
+
+  <div class="auth-wrap">
+    <div class="auth-card" id="authCard">
+      <span class="auth-card__mark chrome-text" data-brand>THORN</span>
+      <div class="auth-card__divider"></div>
+      <h1>Log in</h1>
+      <p class="auth-card__sub">
+        Log in to check out, track your orders, and save items to your wishlist.
+      </p>
+
+      <div class="field">
+        <label for="email">Email</label>
+        <input type="email" id="email" placeholder="you@example.com" autocomplete="email">
+      </div>
+      <div class="field">
+        <label for="password">Password</label>
+        <input type="password" id="password" placeholder="Your password" autocomplete="current-password">
+      </div>
+
+      <button class="btn" id="loginBtn">Log in</button>
+      <p class="auth-card__foot">
+        No account yet? <a href="register.html">Sign up</a>
+      </p>
+    </div>
+  </div>
+
+  <script src="api.js" defer></script>
+  <script src="brand.js" defer></script>
+  <script src="ui.js" defer></script>
+  <script src="announcement.js" defer></script>
+  <script src="coupon-banner.js" defer></script>
+  <script src="footer.js" defer></script>
+  <script src="login.js" defer></script>
+</body>
+</html>
